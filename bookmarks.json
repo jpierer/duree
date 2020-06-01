@@ -1,0 +1,15 @@
+[
+    {
+        "group": "Daily",
+        "items": [
+            {
+                "title": "Youtube",
+                "url": "youtube.de"
+            },
+            {
+                "title": "Mailbox",
+                "url": "mailbox.org"
+            }
+        ]
+    }
+]

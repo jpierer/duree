@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>duree</title>
+        <link rel="stylesheet" href="/static/app.css">
+    </head>
+
+    <body>
+
+        <div class="links-wrapper">
+            {{range .}}
+                <div class="{{.Group}}-links">
+                    <h1>{{.Group}}</h1>
+                    {{range .Items}}
+                        <a href="{{.URL}}">{{.Title}}</a>
+                    {{end}} 
+                </div>
+            {{end}}
+        </div>
+
+        <script async src="/static/app.js"></script>
+    </body>
+
+</html>
