@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -19,7 +20,9 @@ type Duree struct {
 // Run starts the duree app
 func (d *Duree) Run() {
 	r := mux.NewRouter()
+
 	r.HandleFunc("/", d.indexHandler()).Methods("GET")
+	r.HandleFunc("/save", d.saveHandler()).Methods("POST")
 
 	staticBox := rice.MustFindBox("static")
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(staticBox.HTTPBox())))
@@ -31,8 +34,15 @@ func (d *Duree) Run() {
 func (d *Duree) indexHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
+		v := r.URL.Query()
+
+		setup := false
+		if v.Get("setup") != "" {
+			setup = true
+		}
+
 		// reading the bookmarks
-		bm, err := d.readBookmarks(d.bookmarkFilepath)
+		bm, err := d.read(d.bookmarkFilepath)
 		if err != nil {
 			log.Println(err.Error(), d.bookmarkFilepath)
 			http.Error(w, err.Error(), 500)
@@ -61,7 +71,22 @@ func (d *Duree) indexHandler() http.HandlerFunc {
 			http.Error(w, err.Error(), 500)
 			return
 		}
-		tmplIndex.Execute(w, bm)
+		tmplIndex.Execute(w, struct {
+			Bookmarks []Bookmarks
+			Setup     bool
+		}{bm, setup})
+
+	}
+
+}
+
+func (d *Duree) saveHandler() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+		v := r.URL.Query()
+		data := v.Get("data")
+
+		fmt.Println(data)
 
 	}
 

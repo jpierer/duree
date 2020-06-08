@@ -9,19 +9,22 @@
     </head>
 
     <body>
-
+        <a style="display: block; color:RED;" href="?setup=1">SETUP</a>
+        <span class="save-btn" style="display: none;">SAVE</span>
         <div class="links-wrapper">
-            {{range .}}
-                <div class="{{.Group}}-links">
-                    <h1>{{.Group}}</h1>
-                    {{range .Items}}
-                        <a href="{{.URL}}">{{.Title}}</a>
-                    {{end}} 
-                </div>
+            {{range .Bookmarks}}
+            <div class="{{.Group}}-links">
+                <h1>{{.Group}}</h1>
+                {{range .Items}}
+                <a href="{{.URL}}">{{.Title}}</a> {{end}}
+            </div>
             {{end}}
         </div>
 
-        <script async src="/static/app.js"></script>
+        {{if .Setup}}
+        <script src="/static/jquery.min.js"></script>
+        <script src="/static/app.js"></script>
+        {{end}}
     </body>
 
 </html>
