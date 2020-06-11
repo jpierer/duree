@@ -12,7 +12,9 @@ func main() {
 		listenAddr = "0.0.0.0:8080"
 	}
 
-	bookmarkFile := os.Getenv("dureeBookmarksFile")
+	// bookmarkFile := os.Getenv("dureeBookmarksFile")
+	bookmarkFile := "/Users/julianpierer/dev/duree/bookmarks.json"
+
 	if bookmarkFile == "" {
 		bookmarkFile = "~/.bookmarks.json"
 	}

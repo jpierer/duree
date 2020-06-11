@@ -9,22 +9,29 @@
     </head>
 
     <body>
-        <a style="display: block; color:RED;" href="?setup=1">SETUP</a>
-        <span class="save-btn" style="display: none;">SAVE</span>
+
+        <div class="actions">
+            <button id="setup">SETUP</button>
+        </div>
+
         <div class="links-wrapper">
             {{range .Bookmarks}}
-            <div class="{{.Group}}-links">
-                <h1>{{.Group}}</h1>
+            <div data-group="{{.Group}}" class="{{.Group}}-links">
+                <h1 class="">{{.Group}}</h1>
                 {{range .Items}}
-                <a href="{{.URL}}">{{.Title}}</a> {{end}}
+                <a class=""
+                    data-item=""
+                    data-title="{{.Title}}"
+                    data-url="{{.URL}}"
+                    href="{{.URL}}">{{.Title}}</a>
+                {{end}}
             </div>
             {{end}}
         </div>
 
-        {{if .Setup}}
         <script src="/static/jquery.min.js"></script>
+        <script src="/static/jquery.editable.min.js"></script>
         <script src="/static/app.js"></script>
-        {{end}}
     </body>
 
 </html>

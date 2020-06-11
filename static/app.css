@@ -44,9 +44,6 @@ h1 {
     margin-bottom: 8px;
 }
 
-.save-btn {
-    background-color: #202125;
-    color: #fff;
-    display: inline-block;
-    padding: 5px;
+.actions #setup {
+    color: #202125;
 }

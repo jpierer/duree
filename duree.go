@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
 	"html/template"
 	"log"
 	"net/http"
@@ -34,15 +34,8 @@ func (d *Duree) Run() {
 func (d *Duree) indexHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		v := r.URL.Query()
-
-		setup := false
-		if v.Get("setup") != "" {
-			setup = true
-		}
-
 		// reading the bookmarks
-		bm, err := d.read(d.bookmarkFilepath)
+		bookmarks, err := d.read(d.bookmarkFilepath)
 		if err != nil {
 			log.Println(err.Error(), d.bookmarkFilepath)
 			http.Error(w, err.Error(), 500)
@@ -73,8 +66,7 @@ func (d *Duree) indexHandler() http.HandlerFunc {
 		}
 		tmplIndex.Execute(w, struct {
 			Bookmarks []Bookmarks
-			Setup     bool
-		}{bm, setup})
+		}{bookmarks})
 
 	}
 
@@ -83,11 +75,25 @@ func (d *Duree) indexHandler() http.HandlerFunc {
 func (d *Duree) saveHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		v := r.URL.Query()
-		data := v.Get("data")
+		// decode json request
+		decoder := json.NewDecoder(r.Body)
+		var bookmarks []Bookmarks
+		err := decoder.Decode(&bookmarks)
 
-		fmt.Println(data)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 
+		// write bookmarks to file
+		err = d.write(d.bookmarkFilepath, bookmarks)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte("{\"success\": true, \"msg\": \"data_saved\"}"))
 	}
 
 }
