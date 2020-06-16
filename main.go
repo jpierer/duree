@@ -1,20 +1,25 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
 )
 
 func main() {
-	listenAddr := os.Getenv("dureeListenAddr")
-	if listenAddr == "" {
-		listenAddr = "0.0.0.0:3000"
-	}
 
-	bookmarkFile := os.Getenv("dureeBookmarksFile")
-	if bookmarkFile == "" {
-		bookmarkFile = "~/.bookmarks.json"
+	listenAddr := flag.String("listenAddr", "", "host:port")
+	bookmarkFile := flag.String("bookmarkFile", "", "path to the bookmarks.json")
+
+	flag.Parse()
+
+	// check for required parameters
+	if *listenAddr == "" || *bookmarkFile == "" {
+		fmt.Print("\nUsage of ./duree:\n\n")
+		flag.PrintDefaults()
+		os.Exit(1)
 	}
 
 	c := make(chan os.Signal)
@@ -25,6 +30,6 @@ func main() {
 		os.Exit(1)
 	}()
 
-	duree := &Duree{listenAddr: listenAddr, bookmarkFilepath: bookmarkFile}
+	duree := &Duree{listenAddr: *listenAddr, bookmarkFilepath: *bookmarkFile}
 	duree.Run()
 }
