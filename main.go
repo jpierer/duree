@@ -9,12 +9,10 @@ import (
 func main() {
 	listenAddr := os.Getenv("dureeListenAddr")
 	if listenAddr == "" {
-		listenAddr = "0.0.0.0:8080"
+		listenAddr = "0.0.0.0:3000"
 	}
 
-	// bookmarkFile := os.Getenv("dureeBookmarksFile")
-	bookmarkFile := "/Users/julianpierer/dev/duree/bookmarks.json"
-
+	bookmarkFile := os.Getenv("dureeBookmarksFile")
 	if bookmarkFile == "" {
 		bookmarkFile = "~/.bookmarks.json"
 	}

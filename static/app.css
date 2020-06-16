@@ -1,9 +1,9 @@
-* {
+ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Inter";
-    color: #F5F5F5;
+    color: #202125;
     font-size: 13.5px;
 }
 
@@ -44,6 +44,26 @@ h1 {
     margin-bottom: 8px;
 }
 
-.actions #setup {
-    color: #202125;
+.editmode {
+    background: red;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: #d3ceff;
+    color: #736bbd;
+}
+
+.editmode input {
+    margin-top: 10px;
+    width: 65%;
+    padding: 10px;
+    font-size: 16px;
+    outline-color: #7061f3;
+}
+
+.editmode input.title {
+    width: 30%;
 }
