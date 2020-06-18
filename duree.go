@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"html/template"
 	"log"
 	"net/http"
@@ -19,10 +18,10 @@ type Duree struct {
 
 // Run starts the duree app
 func (d *Duree) Run() {
+
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", d.indexHandler()).Methods("GET")
-	r.HandleFunc("/save", d.saveHandler()).Methods("POST")
 
 	staticBox := rice.MustFindBox("static")
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(staticBox.HTTPBox())))
@@ -68,32 +67,6 @@ func (d *Duree) indexHandler() http.HandlerFunc {
 			Bookmarks []Bookmarks
 		}{bookmarks})
 
-	}
-
-}
-
-func (d *Duree) saveHandler() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-
-		// decode json request
-		decoder := json.NewDecoder(r.Body)
-		var bookmarks []Bookmarks
-		err := decoder.Decode(&bookmarks)
-
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		// write bookmarks to file
-		err = d.write(d.bookmarkFilepath, bookmarks)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte("{\"success\": true, \"msg\": \"data_saved\"}"))
 	}
 
 }

@@ -10,23 +10,12 @@
 
     <body>
 
-        <div class="editmode" style="display: none;">
-            <p>click an item, enter title and url and press enter!</p>
-            <div class="editor" data-editid="">
-                <input class="title" name="title" value="" />
-                <input class="url" name="url" value="" />
-            </div>
-        </div>
-
         <div class="links-wrapper">
-            {{range $i, $bookmark := .Bookmarks}}
+            {{range .Bookmarks}}
             <div class="{{.Group}}-links group-container">
-                <h1 data-group="{{.Group}}" data-editable="{{$i}}" class="">{{.Group}}</h1>
-                {{range $c, $item := .Items}}
-                <a data-editable="{{$i}}{{$c}}" class="link"
-                    data-item=""
-                    data-title="{{.Title}}"
-                    data-url="{{.URL}}"
+                <h1 data-group="{{.Group}}">{{.Group}}</h1>
+                {{range .Items}}
+                <a class="link"
                     href="{{.URL}}">{{.Title}}</a>
                 {{end}}
             </div>
@@ -34,8 +23,6 @@
 
         </div>
 
-        <script src="/static/jquery.min.js"></script>
-        <script src="/static/app.js"></script>
     </body>
 
 </html>
