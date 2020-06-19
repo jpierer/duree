@@ -10,9 +10,10 @@ See it in action below:_
 ## Installation
 
 - Download the bin/duree binary from this repository and start it with your personal parameters. See usage section.
-- In your Browser create a folder called **duree** with some child folders and bookmarks.
-- You are done :)
-
+- In your browser create a bookmark-folder called **duree**.
+- Now create new bookmark folders in it. This are your startpage groups.
+- Under this groups, put your browser bookmarks.
+- That's it :)
 
 
 ## Usage
@@ -41,7 +42,7 @@ An easy way is to put duree in your crontab with the **@reboot** tag:
 @reboot /usr/local/bin/duree --bookmarkFile "/Users/USERNAME/Library/Application Support/Google/Chrome/Default/Bookmarks" --listenAddr "0.0.0.0:3000"
 ```
 
-To open "localhost:3000" on new browser tabs, i personaly use the Chrome Extension [New Tab Redirect](https://chrome.google.com/webstore/detail/new-tab-redirect/icpgjfneehieebagbmdbhnlpiopdcmna?hl=de)
+To open "localhost:3000" on new browser tabs, i personaly use the Chrome extension [New Tab Redirect](https://chrome.google.com/webstore/detail/new-tab-redirect/icpgjfneehieebagbmdbhnlpiopdcmna?hl=de)
 
 
 
