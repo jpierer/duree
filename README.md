@@ -9,14 +9,14 @@ See it in action below:_
 
 ## Installation
 
-- Download the bin/duree binary from this repository and start it with your personal parameters. See usage section.
+- Download the bin/duree binary from this repository and start it with your personal parameters. See usage/parameters section.
 - In your browser create a bookmark-folder called **duree**.
 - Now create new bookmark folders in it. This are your startpage groups.
 - Under this groups, put your browser bookmarks.
 - That's it :)
 
 
-## Usage
+## Usage/Parameters
 
 ```
 $ ./duree
@@ -24,10 +24,18 @@ $ ./duree
 Usage of ./duree:
 
   -bookmarkFile string
-    	path to the bookmarks.json
+    	path to the bookmarks file of your browser
   -listenAddr string
     	host:port
 ```
+
+- **bookmarkFile**
+    - duree uses the chrome browsers own bookmarks file and shows all bookmarks under the folder called **duree**.
+    - On macOS you can find the bookmarks file under: *"/Users/USERNAME/Library/Application Support/Google/Chrome/Default/Bookmarks"*
+
+- **listenAddr**
+    - Here you can control on which host/port duree is listening for your browser requests.
+
 
 ### Example:
 ```

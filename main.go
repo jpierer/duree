@@ -11,7 +11,7 @@ import (
 func main() {
 
 	listenAddr := flag.String("listenAddr", "", "host:port")
-	bookmarkFile := flag.String("bookmarkFile", "", "path to the bookmarks.json")
+	bookmarkFile := flag.String("bookmarkFile", "", "path to the bookmarks file of your browser")
 
 	flag.Parse()
 
