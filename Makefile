@@ -11,3 +11,7 @@ build:
 	mkdir bin
 	rice embed-go
 	go build -o bin/duree
+
+deploy:
+	cp bin/duree /usr/local/bin
+	
