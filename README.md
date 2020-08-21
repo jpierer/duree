@@ -1,4 +1,4 @@
-# duree
+![](demo/duree.png)
 
 _**duree** is my personal very minimalistic and clean browser startpage. 
 See it in action below:_
