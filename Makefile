@@ -2,7 +2,7 @@ run:
 	go run *.go
 
 watch:
-	reflex --start-service -r '\.go$$' -- sh -c "go run *.go --listenAddr \"0.0.0.0:8080\" --bookmarkFile \"/Users/julianpierer/Library/Application Support/Google/Chrome/Default/Bookmarks\""
+	reflex --start-service -r '\.go$$' -- sh -c "go run *.go --listenAddr \"0.0.0.0:8080\" --bookmarkFile \"~/Library/Application Support/Google/Chrome/Default/Bookmarks\""
 
 build:
 	go get github.com/GeertJohan/go.rice
