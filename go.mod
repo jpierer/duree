@@ -1,4 +1,4 @@
-module github.com/jpierer/duree
+module github.com/julianpierer/duree
 
 go 1.13
 
